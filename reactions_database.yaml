@@ -1,0 +1,382 @@
+geometries:
+- id: OF_c1
+  formula: C2F2O2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - F 0.458869 -1.256517 0.035273
+  - O 0.696354 0.956688 -0.0
+  - C -1.516754 -0.0 -0.0
+  - F -1.975619 0.057258 -1.255707
+  - O -2.213102 -0.016694 0.956542
+  charge: 0
+  multiplicity: 1
+  electrons: 46
+  basis_set: Unknown
+- id: OF_0
+  formula: C2F2O2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - F 0.49999 -1.234921 0.0
+  - O 0.663467 0.980082 -0.0
+  - C -1.531272 -0.0 -0.0
+  - F -2.031262 -1.234921 0.0
+  - O -2.194739 0.980082 -0.0
+  charge: 0
+  multiplicity: 1
+  electrons: 46
+  basis_set: Unknown
+- id: OF_9
+  formula: C2F2O2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - F 0.446808 -1.251294 -1.8e-05
+  - O 0.702408 0.954085 -0.0
+  - C -1.52958 -0.0 -0.0
+  - F -1.976388 1.251294 -1.8e-05
+  - O -2.231987 -0.954085 -0.0
+  charge: 0
+  multiplicity: 1
+  electrons: 46
+  basis_set: Unknown
+- id: OCl_0
+  formula: C2Cl2O2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - Cl 0.781566 -1.558187 0.0
+  - O 0.593565 1.031817 -0.0
+  - C -1.558496 -0.0 -0.0
+  - Cl -2.340062 -1.558187 0.0
+  - O -2.152061 1.031817 -0.0
+  charge: 0
+  multiplicity: 1
+  electrons: 62
+  basis_set: Unknown
+- id: OCl_c1
+  formula: C2Cl2O2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - Cl 0.628369 -1.634729 0.046035
+  - O 0.66876 0.984217 -0.0
+  - C -1.522586 0.0 -0.0
+  - Cl -2.150954 -0.181921 -1.625227
+  - O -2.191347 0.136978 0.97464
+  charge: 0
+  multiplicity: 1
+  electrons: 62
+  basis_set: Unknown
+- id: OCl_c2
+  formula: C2Cl2O2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - Cl 0.625314 -1.635222 0.042333
+  - O 0.671178 0.982815 -0.0
+  - C -1.522747 -0.0 -0.0
+  - Cl -2.148061 0.35357 -1.597102
+  - O -2.193926 -0.187529 0.964756
+  charge: 0
+  multiplicity: 1
+  electrons: 62
+  basis_set: Unknown
+- id: OCl_9
+  formula: C2Cl2O2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - Cl 0.637994 -1.619646 0.0
+  - O 0.670901 0.983813 -0.0
+  - C -1.54995 -0.0 -0.0
+  - Cl -2.187944 1.619646 -0.0
+  - O -2.220851 -0.983813 -0.0
+  charge: 0
+  multiplicity: 1
+  electrons: 62
+  basis_set: Unknown
+- id: OBr_0
+  formula: Br2C2O2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - Br 0.883992 -1.692833 0.0
+  - O 0.582818 1.035991 -0.0
+  - C -1.56868 -0.0 -0.0
+  - Br -2.452672 -1.692833 0.0
+  - O -2.151498 1.035991 -0.0
+  charge: 0
+  multiplicity: 1
+  electrons: 98
+  basis_set: Unknown
+- id: OBr_c1
+  formula: Br2C2O2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - Br 0.674789 -1.795611 0.050678
+  - O 0.672317 0.979801 -0.0
+  - C -1.523776 -0.0 -0.0
+  - Br -2.198567 -0.137292 -1.791071
+  - O -2.196093 0.102414 0.974434
+  charge: 0
+  multiplicity: 1
+  electrons: 98
+  basis_set: Unknown
+- id: OBr_c2
+  formula: Br2C2O2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - Br 0.670296 -1.794507 0.038942
+  - O 0.674897 0.97844 -0.0
+  - C -1.526831 -0.0 -0.0
+  - Br -2.197126 0.621054 -1.684063
+  - O -2.201729 -0.318548 0.925132
+  charge: 0
+  multiplicity: 1
+  electrons: 98
+  basis_set: Unknown
+- id: OBr_9
+  formula: Br2C2O2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - Br 0.699949 -1.774698 0.0
+  - O 0.671632 0.980968 -0.0
+  - C -1.555205 0.0 -0.0
+  - Br -2.255154 1.774698 -0.0
+  - O -2.226837 -0.980968 -0.0
+  charge: 0
+  multiplicity: 1
+  electrons: 98
+  basis_set: Unknown
+- id: SF_c2
+  formula: C2F2S2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - F 0.473139 -1.25159 0.008971
+  - S 0.917313 1.306101 -0.0
+  - C -1.490471 -0.0 -0.0
+  - F -1.963611 0.052646 -1.250514
+  - S -2.407783 -0.045582 1.305305
+  charge: 0
+  multiplicity: 1
+  electrons: 62
+  basis_set: Unknown
+- id: SF_c1
+  formula: C2F2S2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - F 0.471246 -1.249015 -0.005017
+  - S 0.956519 1.28466 -0.0
+  - C -1.500221 0.0 -0.0
+  - F -1.971467 -1.222765 -0.25477
+  - S -2.456741 1.256589 0.267089
+  charge: 0
+  multiplicity: 1
+  electrons: 62
+  basis_set: Unknown
+- id: SF_9
+  formula: C2F2S2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - F 0.477786 -1.240345 0.0
+  - S 0.948204 1.294632 -0.0
+  - C -1.49375 -0.0 -0.0
+  - F -1.971536 1.240345 -0.0
+  - S -2.441955 -1.294632 0.0
+  charge: 0
+  multiplicity: 1
+  electrons: 62
+  basis_set: Unknown
+- id: SCl_0
+  formula: C2Cl2S2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - Cl 0.747645 -1.560155 0.0
+  - S 0.878989 1.354501 -0.0
+  - C -1.518182 -0.0 -0.0
+  - Cl -2.265827 -1.560155 0.0
+  - S -2.397171 1.354501 -0.0
+  charge: 0
+  multiplicity: 1
+  electrons: 78
+  basis_set: Unknown
+- id: SCl_c1
+  formula: C2Cl2S2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - Cl 0.628694 -1.61605 0.016061
+  - S 0.883251 1.341115 -0.0
+  - C -1.489393 -0.0 -0.0
+  - Cl -2.118088 -0.347881 -1.578242
+  - S -2.372643 0.301685 1.306743
+  charge: 0
+  multiplicity: 1
+  electrons: 78
+  basis_set: Unknown
+- id: SCl_9
+  formula: C2Cl2S2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - Cl 0.687401 -1.584168 0.0
+  - S 0.924262 1.325569 -0.0
+  - C -1.508702 -0.0 -0.0
+  - Cl -2.196103 1.584168 -0.0
+  - S -2.432964 -1.325569 0.0
+  charge: 0
+  multiplicity: 1
+  electrons: 78
+  basis_set: Unknown
+- id: SBr_0
+  formula: Br2C2S2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - Br 0.855779 -1.689053 0.0
+  - S 0.869779 1.360831 -0.0
+  - C -1.518354 -0.0 -0.0
+  - Br -2.374133 -1.689053 0.0
+  - S -2.388133 1.360831 -0.0
+  charge: 0
+  multiplicity: 1
+  electrons: 114
+  basis_set: Unknown
+- id: SBr_c1
+  formula: Br2C2S2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - Br 0.67587 -1.77179 0.034717
+  - S 0.888498 1.335895 -0.0
+  - C -1.484842 -0.0 -0.0
+  - Br -2.160713 -0.242872 -1.755408
+  - S -2.373338 0.208978 1.319449
+  charge: 0
+  multiplicity: 1
+  electrons: 114
+  basis_set: Unknown
+- id: SBr_9
+  formula: Br2C2S2
+  atomic_coordinates:
+  - C 0.0 0.0 0.0
+  - Br 0.762716 -1.734309 0.0
+  - S 0.934129 1.316923 -0.0
+  - C -1.505198 -0.0 -0.0
+  - Br -2.267914 1.734309 -0.0
+  - S -2.439328 -1.316923 0.0
+  charge: 0
+  multiplicity: 1
+  electrons: 114
+  basis_set: Unknown
+reactions:
+- id: OF_c1_minus_OF_0
+  description: 'Energy difference: OF/c1 minus OF/0'
+  reactants:
+  - geometry_id: OF_c1
+    stoichiometry: 1
+  products:
+  - geometry_id: OF_0
+    stoichiometry: 1
+  details:
+    reference_energy_kcal_mol: 4.75
+- id: OF_c1_minus_OF_9
+  description: 'Energy difference: OF/c1 minus OF/9'
+  reactants:
+  - geometry_id: OF_c1
+    stoichiometry: 1
+  products:
+  - geometry_id: OF_9
+    stoichiometry: 1
+  details:
+    reference_energy_kcal_mol: 7.72
+- id: OCl_0_minus_OCl_c1
+  description: 'Energy difference: OCl/0 minus OCl/c1'
+  reactants:
+  - geometry_id: OCl_0
+    stoichiometry: 1
+  products:
+  - geometry_id: OCl_c1
+    stoichiometry: 1
+  details:
+    reference_energy_kcal_mol: 5.86
+- id: OCl_c2_minus_OCl_9
+  description: 'Energy difference: OCl/c2 minus OCl/9'
+  reactants:
+  - geometry_id: OCl_c2
+    stoichiometry: 1
+  products:
+  - geometry_id: OCl_9
+    stoichiometry: 1
+  details:
+    reference_energy_kcal_mol: 3.48
+- id: OBr_0_minus_OBr_c1
+  description: 'Energy difference: OBr/0 minus OBr/c1'
+  reactants:
+  - geometry_id: OBr_0
+    stoichiometry: 1
+  products:
+  - geometry_id: OBr_c1
+    stoichiometry: 1
+  details:
+    reference_energy_kcal_mol: 9.33
+- id: OBr_c2_minus_OBr_9
+  description: 'Energy difference: OBr/c2 minus OBr/9'
+  reactants:
+  - geometry_id: OBr_c2
+    stoichiometry: 1
+  products:
+  - geometry_id: OBr_9
+    stoichiometry: 1
+  details:
+    reference_energy_kcal_mol: 2.48
+- id: SF_c2_minus_SF_c1
+  description: 'Energy difference: SF/c2 minus SF/c1'
+  reactants:
+  - geometry_id: SF_c2
+    stoichiometry: 1
+  products:
+  - geometry_id: SF_c1
+    stoichiometry: 1
+  details:
+    reference_energy_kcal_mol: 6.43
+- id: SF_c2_minus_SF_9
+  description: 'Energy difference: SF/c2 minus SF/9'
+  reactants:
+  - geometry_id: SF_c2
+    stoichiometry: 1
+  products:
+  - geometry_id: SF_9
+    stoichiometry: 1
+  details:
+    reference_energy_kcal_mol: 12.46
+- id: SCl_0_minus_SCl_c1
+  description: 'Energy difference: SCl/0 minus SCl/c1'
+  reactants:
+  - geometry_id: SCl_0
+    stoichiometry: 1
+  products:
+  - geometry_id: SCl_c1
+    stoichiometry: 1
+  details:
+    reference_energy_kcal_mol: 12.47
+- id: SCl_9_minus_SCl_c1
+  description: 'Energy difference: SCl/9 minus SCl/c1'
+  reactants:
+  - geometry_id: SCl_9
+    stoichiometry: 1
+  products:
+  - geometry_id: SCl_c1
+    stoichiometry: 1
+  details:
+    reference_energy_kcal_mol: 4.23
+- id: SBr_0_minus_SBr_c1
+  description: 'Energy difference: SBr/0 minus SBr/c1'
+  reactants:
+  - geometry_id: SBr_0
+    stoichiometry: 1
+  products:
+  - geometry_id: SBr_c1
+    stoichiometry: 1
+  details:
+    reference_energy_kcal_mol: 19.13
+- id: SBr_9_minus_SBr_c1
+  description: 'Energy difference: SBr/9 minus SBr/c1'
+  reactants:
+  - geometry_id: SBr_9
+    stoichiometry: 1
+  products:
+  - geometry_id: SBr_c1
+    stoichiometry: 1
+  details:
+    reference_energy_kcal_mol: 8.34
