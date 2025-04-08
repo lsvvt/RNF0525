@@ -5,6 +5,8 @@ from progress_table import ProgressTable
 import pandas as pd
 from joblib import Memory
 import os
+import density_functional_approximation_dm21 as dm21
+
 
 cachedir = os.path.join(os.getcwd(), 'mycache')
 memory = Memory(location=cachedir, verbose=0)
@@ -66,13 +68,25 @@ def compute_energy_pyscf(geometry_data, basis_set, xc):
     Возвращает энергию в Hartree (float).
     """
     mol = build_pyscf_mol(geometry_data, basis_set)
-    mf = dft.RKS(mol, xc=xc).density_fit().to_gpu()
+    mf = dft.RKS(mol, xc=xc).density_fit()
 
-    # mf.grids.level = 5
-    # mf.conv_tol = 1E-9
-    # mf.conv_tol_grad = 1E-6
-    # mf.with_df.auxbasis = "def2-universal-jfit"
-    energy = mf.kernel()
+    if xc == "DM21":
+        mf.xc = 'B3LYP'
+        mf.run()
+        dm0 = mf.make_rdm1()
+
+        mf._numint = dm21.NeuralNumInt(dm21.Functional.DM21)
+        # It's wise to relax convergence tolerances.
+        mf.conv_tol = 1E-6
+        mf.conv_tol_grad = 1E-3
+        # Run the DFT calculation.
+        energy = mf.kernel(dm0=dm0)
+    else:
+        # mf.grids.level = 5
+        # mf.conv_tol = 1E-9
+        # mf.conv_tol_grad = 1E-6
+        # mf.with_df.auxbasis = "def2-universal-jfit"
+        energy = mf.kernel()
     # print(geometry_data["id"], energy)
     return energy
 
@@ -158,11 +172,11 @@ if __name__ == "__main__":
         "is_hybrid": [],
     }
     is_hybrid = ["non hybrid"] * 6 + ["hybrid"] * 6
-    for i, xc in enumerate(table(["LDA", "M06-L", "PBE", "TPSS", "r2SCAN", "SCAN", "SCAN0", "PBE*0.46+HF*0.54,PBE", "PBE0", "M06-2X", "M05-2X", "B3LYP"])):
+    for i, xc in enumerate(table(["DM21", "LDA", "M06-L", "PBE", "TPSS", "r2SCAN", "SCAN", "SCAN0", "PBE*0.46+HF*0.54,PBE", "PBE0", "M06-2X", "M05-2X", "B3LYP"])):
 
         table["xc"] = xc
 
-        for basis_set in table(["cc-pVQZ", "cc-pVTZ", ]):#"cc-pVDZ", "def2-QZVP", "def2-TZVP", "def2-SVP"]):
+        for basis_set in table(["cc-pVDZ", "cc-pVQZ", "cc-pVTZ", "cc-pVDZ", "def2-QZVP", "def2-TZVP", "def2-SVP"]):
             table["basis_set"] = basis_set
 
             mae, maxe = main(basis_set, xc)
