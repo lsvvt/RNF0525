@@ -1,11 +1,14 @@
 import yaml
-import math
+import numpy as np
 from pyscf import gto, scf, dft
 from progress_table import ProgressTable
 import pandas as pd
 from joblib import Memory
 import os
 import density_functional_approximation_dm21 as dm21
+import jsonpickle
+import pylibxc
+
 
 
 cachedir = os.path.join(os.getcwd(), 'mycache')
@@ -60,6 +63,89 @@ def build_pyscf_mol(geometry_data, basis_set):
     )
     return mol
 
+def eval_gga_xc_pidl(xc_code, rho, spin=0, relativity=0, deriv=2, omega=None, verbose=None):
+    inp = {}
+    inp["rho"] = rho[0]
+    inp["sigma"] = rho[1]**2 + rho[2]**2 + rho[3]**2
+    inp["tau"] = rho[5]
+
+    params = np.load("par_pbe0pbe0_old_d3bj.npy")[-1][1:]
+    funcc = pylibxc.LibXCFunctional("MGGA_C_M06_2X", "unpolarized")
+    funcx = pylibxc.LibXCFunctional("HYB_MGGA_X_M06_2X", "unpolarized")
+
+    ext_c = np.zeros(27)
+    for i in range(22):
+        ext_c[i + 4] = params[i]
+    for i in range(4):
+        ext_c[i] = params[i + 22]
+    ext_c[26] = 1e-10
+
+    ext_x = np.zeros(14)
+    ext_x[:13] = params[26:26+13]
+    ext_x[13] = 0.54 #nothing changed
+    ext_x[12] = 1 #change
+    # ext_x[0] = 0.46 #changed
+
+    funcc.set_ext_params(np.array(ext_c))
+    funcx.set_ext_params(np.array(ext_x))
+
+    retx = funcx.compute(inp)
+    retc = funcc.compute(inp)
+
+    vrho = retx["vrho"].flatten() + retc["vrho"].flatten()
+    vgamma = retx["vsigma"].flatten() + retc["vsigma"].flatten()
+    vtau = retx["vtau"].flatten() + retc["vtau"].flatten()
+    vlapl = None
+    vxc = (vrho, vgamma, vlapl  , vtau)
+    exc = retx["zk"].flatten() + retc["zk"].flatten()
+
+    fxc = None
+    kxc = None
+
+    return exc, vxc, fxc, kxc
+
+
+def eval_gga_xc_pi(xc_code, rho, spin=0, relativity=0, deriv=2, omega=None, verbose=None):
+    inp = {}
+    inp["rho"] = rho[0]
+    inp["sigma"] = rho[1]**2 + rho[2]**2 + rho[3]**2
+    inp["tau"] = rho[5]
+
+    params = np.load("par_pbe0pbe0_old.npy")[-5][1:]
+    funcc = pylibxc.LibXCFunctional("MGGA_C_M06_2X", "unpolarized")
+    funcx = pylibxc.LibXCFunctional("HYB_MGGA_X_M06_2X", "unpolarized")
+
+    ext_c = np.zeros(27)
+    for i in range(22):
+        ext_c[i + 4] = params[i]
+    for i in range(4):
+        ext_c[i] = params[i + 22]
+    ext_c[26] = 1e-10
+
+    ext_x = np.zeros(14)
+    ext_x[:13] = params[26:26+13]
+    ext_x[13] = 0.54 #nothing changed
+    ext_x[12] = 1 #change
+    # ext_x[0] = 0.46 #changed
+
+    funcc.set_ext_params(np.array(ext_c))
+    funcx.set_ext_params(np.array(ext_x))
+
+    retx = funcx.compute(inp)
+    retc = funcc.compute(inp)
+
+    vrho = retx["vrho"].flatten() + retc["vrho"].flatten()
+    vgamma = retx["vsigma"].flatten() + retc["vsigma"].flatten()
+    vtau = retx["vtau"].flatten() + retc["vtau"].flatten()
+    vlapl = None
+    vxc = (vrho, vgamma, vlapl  , vtau)
+    exc = retx["zk"].flatten() + retc["zk"].flatten()
+
+    fxc = None
+    kxc = None
+
+    return exc, vxc, fxc, kxc
+
 @memory.cache
 def compute_energy_pyscf(geometry_data, basis_set, xc):
     """
@@ -68,7 +154,7 @@ def compute_energy_pyscf(geometry_data, basis_set, xc):
     Возвращает энергию в Hartree (float).
     """
     mol = build_pyscf_mol(geometry_data, basis_set)
-    mf = dft.RKS(mol, xc=xc).density_fit()
+    mf = dft.RKS(mol).density_fit()#.to_gpu()
 
     if xc == "DM21":
         mf.xc = 'B3LYP'
@@ -76,18 +162,22 @@ def compute_energy_pyscf(geometry_data, basis_set, xc):
         dm0 = mf.make_rdm1()
 
         mf._numint = dm21.NeuralNumInt(dm21.Functional.DM21)
-        # It's wise to relax convergence tolerances.
+
         mf.conv_tol = 1E-6
         mf.conv_tol_grad = 1E-3
-        # Run the DFT calculation.
+
         energy = mf.kernel(dm0=dm0)
     else:
-        # mf.grids.level = 5
-        # mf.conv_tol = 1E-9
-        # mf.conv_tol_grad = 1E-6
-        # mf.with_df.auxbasis = "def2-universal-jfit"
+        if xc == "PBE-2X":
+            mf.xc = "PBE*0.46+HF*0.54,PBE"
+        elif xc == "piM06-2X-DL":
+            mf = mf.define_xc_(eval_gga_xc_pidl, 'MGGA', hyb=0.54)
+        elif xc == "piM06-2X":
+            mf = mf.define_xc_(eval_gga_xc_pi, 'MGGA', hyb=0.54)
+        else:
+            mf.xc = xc
         energy = mf.kernel()
-    # print(geometry_data["id"], energy)
+
     return energy
 
 def main(basis_set, xc):
@@ -104,7 +194,18 @@ def main(basis_set, xc):
         table["geom_id"] = geom_id
         # print(geom_id)
         # Меняем метод при необходимости (HF, DFT, CCSD, ...)
-        e_hartree = compute_energy_pyscf(geom, basis_set, xc)
+        level = geom_id + "_" + xc + "_" + basis_set
+        if os.path.exists(f"bak/{level}"):
+            with open(f"bak/{level}", "r") as f:
+                e_hartree = jsonpickle.decode(f.read())
+            # with open(f"bak/{level}", "w") as f:
+            #     f.write(jsonpickle.encode(float(e_hartree)))
+        else:
+            e_hartree = compute_energy_pyscf(geom, basis_set, xc)
+            with open(f"bak/{level}", "w") as f:
+                f.write(jsonpickle.encode(float(e_hartree)))
+
+        
         computed_energies[geom_id] = e_hartree
 
 
@@ -171,12 +272,12 @@ if __name__ == "__main__":
         "maxe": [],
         "is_hybrid": [],
     }
-    is_hybrid = ["non hybrid"] * 6 + ["hybrid"] * 6
-    for i, xc in enumerate(table(["DM21", "LDA", "M06-L", "PBE", "TPSS", "r2SCAN", "SCAN", "SCAN0", "PBE*0.46+HF*0.54,PBE", "PBE0", "M06-2X", "M05-2X", "B3LYP"])):
+    is_hybrid = ["non hybrid"] * 6 + ["hybrid"] * 9
+    for i, xc in enumerate(table(["LDA", "M06-L", "PBE", "TPSS", "r2SCAN", "SCAN", "SCAN0", "PBE-2X", "PBE0", "M06-2X", "M05-2X", "B3LYP", "DM21", "piM06-2X-DL", "piM06-2X"])):
 
         table["xc"] = xc
 
-        for basis_set in table(["cc-pVDZ", "cc-pVQZ", "cc-pVTZ", "cc-pVDZ", "def2-QZVP", "def2-TZVP", "def2-SVP"]):
+        for basis_set in table(["cc-pVQZ", ]): #"cc-pVDZ", "cc-pVTZ", "cc-pVDZ", "def2-QZVP", "def2-TZVP", "def2-SVP"]):
             table["basis_set"] = basis_set
 
             mae, maxe = main(basis_set, xc)

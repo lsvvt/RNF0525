@@ -1,4 +1,4 @@
-# first line: 63
+# first line: 149
 @memory.cache
 def compute_energy_pyscf(geometry_data, basis_set, xc):
     """
@@ -7,7 +7,7 @@ def compute_energy_pyscf(geometry_data, basis_set, xc):
     Возвращает энергию в Hartree (float).
     """
     mol = build_pyscf_mol(geometry_data, basis_set)
-    mf = dft.RKS(mol, xc=xc).density_fit()
+    mf = dft.RKS(mol).density_fit()#.to_gpu()
 
     if xc == "DM21":
         mf.xc = 'B3LYP'
@@ -15,16 +15,20 @@ def compute_energy_pyscf(geometry_data, basis_set, xc):
         dm0 = mf.make_rdm1()
 
         mf._numint = dm21.NeuralNumInt(dm21.Functional.DM21)
-        # It's wise to relax convergence tolerances.
+
         mf.conv_tol = 1E-6
         mf.conv_tol_grad = 1E-3
-        # Run the DFT calculation.
+
         energy = mf.kernel(dm0=dm0)
     else:
-        # mf.grids.level = 5
-        # mf.conv_tol = 1E-9
-        # mf.conv_tol_grad = 1E-6
-        # mf.with_df.auxbasis = "def2-universal-jfit"
+        if xc == "PBE-2X":
+            mf.xc = "PBE*0.46+HF*0.54,PBE"
+        elif xc == "piM06-2X-DL":
+            mf = mf.define_xc_(eval_gga_xc_pidl, 'MGGA', hyb=0.54)
+        elif xc == "piM06-2X":
+            mf = mf.define_xc_(eval_gga_xc_pi, 'MGGA', hyb=0.54)
+        else:
+            mf.xc = xc
         energy = mf.kernel()
-    # print(geometry_data["id"], energy)
+
     return energy
