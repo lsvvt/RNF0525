@@ -5,7 +5,10 @@ from progress_table import ProgressTable
 import pandas as pd
 from joblib import Memory
 import os
-import density_functional_approximation_dm21 as dm21
+try:
+    import density_functional_approximation_dm21 as dm21
+except:
+    pass
 import jsonpickle
 import pylibxc
 import sys
@@ -147,7 +150,7 @@ def eval_gga_xc_pi(xc_code, rho, spin=0, relativity=0, deriv=2, omega=None, verb
 
     return exc, vxc, fxc, kxc
 
-@memory.cache
+# @memory.cache
 def compute_energy_pyscf(geometry_data, basis_set, xc):
     """
     Собирает молекулу (Mole) и считает энергию в PySCF.
@@ -155,7 +158,11 @@ def compute_energy_pyscf(geometry_data, basis_set, xc):
     Возвращает энергию в Hartree (float).
     """
     mol = build_pyscf_mol(geometry_data, basis_set)
-    mf = dft.RKS(mol).density_fit()#.to_gpu()
+
+    if "gpu" in sys.argv:
+        mf = dft.UKS(mol).density_fit().to_gpu()
+    else:
+        mf = dft.UKS(mol).density_fit()
 
     if xc == "DM21":
         mf.xc = 'B3LYP'
@@ -264,6 +271,8 @@ if __name__ == "__main__":
     )
     table.add_column("xc")
 
+    fyaml = sys.argv[1]
+
 
     data = {
         "basis_set": [],
@@ -277,28 +286,32 @@ if __name__ == "__main__":
 
         table["xc"] = xc
 
-        for basis_set in table(["cc-pVQZ", ]): #"cc-pVDZ", "cc-pVTZ", "cc-pVDZ", "def2-QZVP", "def2-TZVP", "def2-SVP"]):
-            table["basis_set"] = basis_set
+        if fyaml == "ctb22_reactions_database.yaml":
+            basis_set = "cc-pVQZ"
+        elif fyaml == "hocl_dissociation_database.yaml":
+            basis_set = "aug-cc-pVTZ"
 
-            mae, maxe = main(basis_set, xc, sys.argv[1])
+        table["basis_set"] = basis_set
 
-            data["basis_set"].append(basis_set)
+        mae, maxe = main(basis_set, xc, sys.argv[1])
 
-            xc_tmp = xc
-            if xc == "PBE*0.46+HF*0.54,PBE":
-                xc_tmp = "PBE-2X"
-            data["xc"].append(xc_tmp)
-            
-            data["mae"].append(mae)
-            data["maxe"].append(maxe)
-            data["is_hybrid"].append(is_hybrid[i])
+        data["basis_set"].append(basis_set)
 
-            table["mae"] = mae
-            table["maxe"] = maxe
+        xc_tmp = xc
+        if xc == "PBE*0.46+HF*0.54,PBE":
+            xc_tmp = "PBE-2X"
+        data["xc"].append(xc_tmp)
+        
+        data["mae"].append(mae)
+        data["maxe"].append(maxe)
+        data["is_hybrid"].append(is_hybrid[i])
 
-            table.next_row()
+        table["mae"] = mae
+        table["maxe"] = maxe
+
+        table.next_row()
 
     table.close()
 
     df = pd.DataFrame(data)
-    df.to_csv('data.csv', index=False)  
+    df.to_csv(sys.argv[1] + '_data.csv', index=False)  

@@ -72,7 +72,7 @@ def parse_xyz(xyz_path):
 def main():
     res_path = "CTB22/.res"      # исходный файл с данными
     base_folder = "CTB22"        # корневая папка для xyz
-    output_yaml = "reactions_database.yaml"
+    output_yaml = "ctb22_reactions_database.yaml"
 
     # Словарь для хранения всех уникальных геометрий:
     # ключ — «путь_без_базы» (например, "OF/c1"), значение — объект-словарь с данными
