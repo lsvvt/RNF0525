@@ -8,6 +8,7 @@ import os
 import density_functional_approximation_dm21 as dm21
 import jsonpickle
 import pylibxc
+import sys
 
 
 
@@ -180,9 +181,9 @@ def compute_energy_pyscf(geometry_data, basis_set, xc):
 
     return energy
 
-def main(basis_set, xc):
+def main(basis_set, xc, fyaml):
     # Пусть наш сгенерированный YAML-файл называется reactions_database.yaml
-    data = load_reactions_database("reactions_database.yaml")
+    data = load_reactions_database(fyaml)
 
     geometries = data.get("geometries", [])
     reactions = data.get("reactions", [])
@@ -264,7 +265,6 @@ if __name__ == "__main__":
     table.add_column("xc")
 
 
-
     data = {
         "basis_set": [],
         "xc": [],
@@ -280,7 +280,7 @@ if __name__ == "__main__":
         for basis_set in table(["cc-pVQZ", ]): #"cc-pVDZ", "cc-pVTZ", "cc-pVDZ", "def2-QZVP", "def2-TZVP", "def2-SVP"]):
             table["basis_set"] = basis_set
 
-            mae, maxe = main(basis_set, xc)
+            mae, maxe = main(basis_set, xc, sys.argv[1])
 
             data["basis_set"].append(basis_set)
 
