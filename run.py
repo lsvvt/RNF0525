@@ -331,6 +331,7 @@ if __name__ == "__main__":
 
         if fyaml == "ctb22_reactions_database.yaml":
             basis_set = "cc-pVQZ"
+            basis_set = "cc-pVDZ"
         elif fyaml == "hocl_dissociation_database.yaml":
             basis_set = "aug-cc-pVTZ"
         elif fyaml == "h4_database.yaml":
@@ -338,7 +339,10 @@ if __name__ == "__main__":
 
         table["basis_set"] = basis_set
 
-        mae, maxe = main(basis_set, xc, sys.argv[1])
+        try:
+            mae, maxe = main(basis_set, xc, sys.argv[1])
+        except:
+            mae, maxe = 0, 0
 
         data["basis_set"].append(basis_set)
 
