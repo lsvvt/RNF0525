@@ -12,6 +12,7 @@ except:
 import jsonpickle
 import pylibxc
 import sys
+from functionals import NN_FUNCTIONAL
 
 
 
@@ -222,6 +223,9 @@ def compute_energy_pyscf(geometry_data, basis_set, xc):
             mf = mf.define_xc_(eval_gga_xc_pidl, 'MGGA', hyb=0.54)
         elif xc == "piM06-2X":
             mf = mf.define_xc_(eval_gga_xc_pi, 'MGGA', hyb=0.54)
+        elif xc == "NN-PBE":
+            model = NN_FUNCTIONAL("NN_PBE_18")
+            mf.define_xc_(model.eval_xc, 'MGGA')
         else:
             mf.xc = xc
         energy = mf.kernel()
@@ -322,16 +326,15 @@ if __name__ == "__main__":
         "xc": [],
         "mae": [],
         "maxe": [],
-        "is_hybrid": [],
+        # "is_hybrid": [],
     }
-    is_hybrid = ["non hybrid"] * 6 + ["hybrid"] * 9
-    for i, xc in enumerate(table(["LDA", "M06-L", "PBE", "TPSS", "r2SCAN", "SCAN", "SCAN0", "PBE-2X", "PBE0", "M06-2X", "M05-2X", "B3LYP", "DM21", "piM06-2X-DL", "piM06-2X"])):
+    # is_hybrid = ["non hybrid"] * 6 + ["hybrid"] * 9
+    for i, xc in enumerate(table(["NN-PBE", "LDA", "M06-L", "PBE", "TPSS", "r2SCAN", "SCAN", "SCAN0", "PBE-2X", "PBE0", "M06-2X", "M05-2X", "B3LYP", "DM21", "piM06-2X-DL", "piM06-2X"])):
 
         table["xc"] = xc
 
         if fyaml == "ctb22_reactions_database.yaml":
             basis_set = "cc-pVQZ"
-            basis_set = "cc-pVDZ"
         elif fyaml == "hocl_dissociation_database.yaml":
             basis_set = "aug-cc-pVTZ"
         elif fyaml == "h4_database.yaml":
@@ -339,10 +342,12 @@ if __name__ == "__main__":
 
         table["basis_set"] = basis_set
 
-        try:
-            mae, maxe = main(basis_set, xc, sys.argv[1])
-        except:
-            mae, maxe = 0, 0
+        mae, maxe = main(basis_set, xc, sys.argv[1])
+
+        # try:
+        #     mae, maxe = main(basis_set, xc, sys.argv[1])
+        # except:
+        #     mae, maxe = 0, 0
 
         data["basis_set"].append(basis_set)
 
@@ -353,7 +358,7 @@ if __name__ == "__main__":
         
         data["mae"].append(mae)
         data["maxe"].append(maxe)
-        data["is_hybrid"].append(is_hybrid[i])
+        # data["is_hybrid"].append(is_hybrid[i])
 
         table["mae"] = mae
         table["maxe"] = maxe
