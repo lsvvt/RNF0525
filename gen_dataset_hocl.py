@@ -122,8 +122,8 @@ def main():
         # Define HOCl geometry for this distance (linear H-O...Cl)
         # Place O at origin, H along -x, Cl along +x
         hocl_coords = [
-            ('H', -oh_bond_length, 0.0, 0.0),
-            ('O', 0.0, 0.0, 0.0),
+            ('O', -oh_bond_length, 0.0, 0.0),
+            ('H', 0.0, 0.0, 0.0),
             ('Cl', dist, 0.0, 0.0)
         ]
         hocl_id = f"HOCl_d{dist:.2f}" # Use 2 decimal places for ID

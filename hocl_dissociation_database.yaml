@@ -16,7 +16,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d1.50
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 1.50000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -24,7 +24,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d1.60
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 1.60000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -32,7 +32,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d1.70
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 1.70000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -40,7 +40,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d1.80
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 1.80000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -48,7 +48,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d1.85
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 1.85000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -56,7 +56,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d1.90
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 1.90000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -64,7 +64,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d1.95
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 1.95000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -72,7 +72,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d2.00
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 2.00000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -80,7 +80,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d2.05
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 2.05000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -88,7 +88,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d2.10
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 2.10000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -96,7 +96,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d2.15
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 2.15000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -104,7 +104,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d2.20
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 2.20000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -112,7 +112,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d2.30
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 2.30000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -120,7 +120,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d2.40
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 2.40000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -128,7 +128,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d2.50
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 2.50000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -136,7 +136,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d2.60
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 2.60000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -144,7 +144,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d2.70
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 2.70000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -152,7 +152,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d2.80
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 2.80000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -160,7 +160,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d2.90
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 2.90000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -168,7 +168,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d3.00
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 3.00000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -176,7 +176,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d3.10
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 3.10000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -184,7 +184,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d3.20
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 3.20000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -192,7 +192,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d3.30
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 3.30000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -200,7 +200,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d3.40
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 3.40000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -208,7 +208,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d3.50
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 3.50000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -216,7 +216,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d3.60
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 3.60000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -224,7 +224,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d3.70
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 3.70000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -232,7 +232,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d3.80
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 3.80000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -240,7 +240,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d3.90
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 3.90000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -248,7 +248,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d4.00
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 4.00000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -256,7 +256,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d4.10
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 4.10000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -264,7 +264,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d4.20
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 4.20000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -272,7 +272,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d4.30
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 4.30000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -280,7 +280,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d4.40
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 4.40000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -288,7 +288,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d4.50
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 4.50000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -296,7 +296,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d4.60
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 4.60000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -304,7 +304,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d4.70
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 4.70000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -312,7 +312,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d4.80
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 4.80000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -320,7 +320,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d4.90
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 4.90000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -328,7 +328,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d5.00
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 5.00000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -336,7 +336,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d5.10
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 5.10000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -344,7 +344,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d5.20
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 5.20000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -352,7 +352,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d5.30
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 5.30000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -360,7 +360,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d5.40
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 5.40000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -368,7 +368,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d5.50
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 5.50000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -376,7 +376,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d5.60
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 5.60000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -384,7 +384,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d5.70
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 5.70000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2
@@ -392,7 +392,7 @@ geometries:
   basis_set: CCSD(T)
 - id: HOCl_d5.80
   formula: ClHO
-  atomic_coordinates: [H -1.00000000 0.00000000 0.00000000, O 0.00000000 0.00000000
+  atomic_coordinates: [O -1.00000000 0.00000000 0.00000000, H 0.00000000 0.00000000
       0.00000000, Cl 5.80000000 0.00000000 0.00000000]
   charge: -1
   multiplicity: 2

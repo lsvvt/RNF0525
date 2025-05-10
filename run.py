@@ -12,7 +12,10 @@ except:
 import jsonpickle
 import pylibxc
 import sys
-from functionals import NN_FUNCTIONAL
+# try:
+#     from functionals import NN_FUNCTIONAL
+# except:
+#     pass
 
 
 
@@ -22,7 +25,9 @@ memory = Memory(location=cachedir, verbose=0)
 import warnings
 warnings.filterwarnings("ignore", message="using cupy as the tensor contraction engine.")
 
+datav2 = {"r":[], "xc": [], "basis": [], "e": []}
 
+dm_l = []
 
 # Константа перевода из Hartree в kcal/mol
 HARTREE_TO_KjmolL = 2625.5
@@ -59,13 +64,24 @@ def build_pyscf_mol(geometry_data, basis_set):
     spin = geometry_data["multiplicity"] - 1
 
     mol = gto.Mole()
-    mol.build(
-        atom=atoms_for_pyscf,
-        charge=geometry_data["charge"],
-        spin=spin,
-        basis=basis_set,
-        verbose=0  # Меньше логов
-    )
+
+    mol = gto.Mole()
+    mol.atom      = atoms_for_pyscf
+    mol.unit      = "Å"
+    mol.charge    = geometry_data["charge"]
+    mol.spin      = spin                # 2S = 0  →  singlet
+    mol.basis     = basis_set
+    # mol.symmetry  = True              # turn symmetry support on
+    # mol.groupname = "Dooh"             # request full D4h (needs libmsym)
+    # mol.verbose=4
+    mol.build()
+    # mol.build(
+    #     atom=atoms_for_pyscf,
+    #     charge=geometry_data["charge"],
+    #     spin=spin,
+    #     basis=basis_set,
+    #     verbose=0  # Меньше логов
+    # )
     return mol
 
 def eval_gga_xc_pidl(xc_code, rho, spin=0, relativity=0, deriv=2, omega=None, verbose=None):
@@ -192,7 +208,7 @@ def eval_gga_xc_pi(xc_code, rho, spin=0, relativity=0, deriv=2, omega=None, verb
     return exc, vxc, fxc, kxc
 
 # @memory.cache
-def compute_energy_pyscf(geometry_data, basis_set, xc):
+def compute_energy_pyscf(geometry_data, basis_set, xc, fyaml):
     """
     Собирает молекулу (Mole) и считает энергию в PySCF.
     method: "HF" или "DFT" (при желании расширить).
@@ -205,6 +221,11 @@ def compute_energy_pyscf(geometry_data, basis_set, xc):
     else:
         mf = dft.UKS(mol).density_fit()
 
+    if fyaml == "h4_database.yaml":
+        mf.DIIS = scf.ADIIS
+    mf.DIIS = scf.ADIIS
+    mf.level_shift = 0.2
+
     if xc == "DM21":
         mf.xc = 'B3LYP'
         mf.run()
@@ -215,7 +236,13 @@ def compute_energy_pyscf(geometry_data, basis_set, xc):
         mf.conv_tol = 1E-6
         mf.conv_tol_grad = 1E-3
 
-        energy = mf.kernel(dm0=dm0)
+        if fyaml == "h4_database.yaml":
+            mf.DIIS = scf.DIIS
+            energy = mf.kernel()
+        else:
+            energy = mf.kernel(dm0=dm0)
+
+        print("E", energy)
     else:
         if xc == "PBE-2X":
             mf.xc = "PBE*0.46+HF*0.54,PBE"
@@ -228,9 +255,14 @@ def compute_energy_pyscf(geometry_data, basis_set, xc):
             mf.define_xc_(model.eval_xc, 'MGGA')
         else:
             mf.xc = xc
-        energy = mf.kernel()
+        
+        if len(dm_l) > 0:
+            energy = mf.kernel(dm0=dm_l[-1])
+        else:
+            energy = mf.kernel()
 
-    return energy
+    dm = mf.make_rdm1()
+    return energy, dm
 
 def main(basis_set, xc, fyaml):
     # Пусть наш сгенерированный YAML-файл называется reactions_database.yaml
@@ -252,8 +284,12 @@ def main(basis_set, xc, fyaml):
                 e_hartree = jsonpickle.decode(f.read())
             # with open(f"bak/{level}", "w") as f:
             #     f.write(jsonpickle.encode(float(e_hartree)))
-        else:
-            e_hartree = compute_energy_pyscf(geom, basis_set, xc)
+        else:                
+            e_hartree, dm = compute_energy_pyscf(geom, basis_set, xc, fyaml)
+
+            if "HOCl" in geom["id"]:
+                dm_l.append(dm)
+
             with open(f"bak/{level}", "w") as f:
                 f.write(jsonpickle.encode(float(e_hartree)))
 
@@ -296,8 +332,16 @@ def main(basis_set, xc, fyaml):
 
         if fyaml == "h4_database.yaml":
             error = E_calc_diff_kcalmol
+        elif fyaml == "hocl_dissociation_database.yaml":
+            error = E_calc_diff_hartree * 627.509 - ref_energy
+            # print(basis_set, error, xc, rxn["id"].split("_d")[1])
+            datav2["e"].append(E_calc_diff_hartree * 627.509)
+            datav2["r"].append(rxn["id"].split("_d")[1])
+            datav2["basis"].append(basis_set)
+            datav2["xc"].append(xc)
         else:
             error = E_calc_diff_kcalmol - ref_energy
+        
         abs_errors.append(abs(error))
 
         # print(f"Реакция: {rxn['id']} / Расчёт: {E_calc_diff_kcalmol:.2f} кдж/моль / "
@@ -328,8 +372,9 @@ if __name__ == "__main__":
         "maxe": [],
         # "is_hybrid": [],
     }
+
     # is_hybrid = ["non hybrid"] * 6 + ["hybrid"] * 9
-    for i, xc in enumerate(table(["NN-PBE", "LDA", "M06-L", "PBE", "TPSS", "r2SCAN", "SCAN", "SCAN0", "PBE-2X", "PBE0", "M06-2X", "M05-2X", "B3LYP", "DM21", "piM06-2X-DL", "piM06-2X"])):
+    for i, xc in enumerate(table(["NN-PBE", "LDA", "M06-L", "PBE0", "DM21"])):#, "PBE", "TPSS", "r2SCAN", "SCAN", "SCAN0", "PBE-2X", "PBE0", "M06-2X", "M05-2X", "B3LYP", "DM21", "piM06-2X-DL", "piM06-2X"])):
 
         table["xc"] = xc
 
@@ -341,13 +386,14 @@ if __name__ == "__main__":
             basis_set = "6-31G"
 
         table["basis_set"] = basis_set
+        dm_l = []
 
-        mae, maxe = main(basis_set, xc, sys.argv[1])
+        # mae, maxe = main(basis_set, xc, sys.argv[1])
 
-        # try:
-        #     mae, maxe = main(basis_set, xc, sys.argv[1])
-        # except:
-        #     mae, maxe = 0, 0
+        try:
+            mae, maxe = main(basis_set, xc, sys.argv[1])
+        except:
+            mae, maxe = 0, 0
 
         data["basis_set"].append(basis_set)
 
@@ -369,3 +415,8 @@ if __name__ == "__main__":
 
     df = pd.DataFrame(data)
     df.to_csv(sys.argv[1] + '_data.csv', index=False)  
+
+
+    if fyaml == "hocl_dissociation_database.yaml":
+        df = pd.DataFrame.from_dict(datav2)
+        df.to_csv('hocl_new_data.csv', index=False)  
