@@ -284,6 +284,7 @@ def compute_energy_pyscf(geometry_data, basis_set, xc, fyaml):
         elif xc == "piM06-2X":
             mf = mf.define_xc_(eval_gga_xc_pi, 'MGGA', hyb=0.54)
         elif xc == "NN-PBE":
+            return 0, None
             model = NN_FUNCTIONAL("NN_PBE_18")
             mf.define_xc_(model.eval_xc, 'MGGA')
         else:
@@ -378,12 +379,18 @@ def main(basis_set, xc, fyaml):
         elif fyaml == "hocl_dissociation_database.yaml":
             error = E_calc_diff_hartree * 627.509 + ref_energy
             # print(basis_set, error, xc, rxn["id"].split("_d")[1])
-            datav2["e"].append(error)
+            datav2["e"].append(E_calc_diff_hartree * 627.509)
             datav2["r"].append(rxn["id"].split("_d")[1])
             datav2["basis"].append(basis_set)
             datav2["xc"].append(xc)
         else:
             error = E_calc_diff_kcalmol - ref_energy
+
+        if xc == "PBE":
+            datav2["e"].append(-ref_energy)
+            datav2["r"].append(rxn["id"].split("_d")[1])
+            datav2["basis"].append(basis_set)
+            datav2["xc"].append("CCSD(T)")
         
         abs_errors.append(abs(error))
 
@@ -434,12 +441,12 @@ if __name__ == "__main__":
         table["basis_set"] = basis_set
         dm_l = []
 
-        mae, maxe = main(basis_set, xc, sys.argv[1])
+        # mae, maxe = main(basis_set, xc, sys.argv[1])
 
-        # try:
-        #     mae, maxe = main(basis_set, xc, sys.argv[1])
-        # except:
-        #     mae, maxe = 0, 0
+        try:
+            mae, maxe = main(basis_set, xc, sys.argv[1])
+        except:
+            mae, maxe = 0, 0
 
         data["basis_set"].append(basis_set)
 
