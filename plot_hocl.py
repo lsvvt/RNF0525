@@ -24,6 +24,15 @@ category_map = {
     'NN-PBE': 'Machine Learning',
 }
 
+color_map = {
+    'LDA':              '#1b9e77',
+    'GGA':              '#d95f02',
+    'meta-GGA':         '#7570b3',
+    'Hybrid GGA':       '#e7298a',
+    'Hybrid meta-GGA':  '#66a61e',
+    'Machine Learning': '#e6ab02',
+}
+
 # 1) Загрузка данных
 df = pd.read_csv('hocl_new_data.csv')  # путь к csv-файлу с данными о кривых растяжения H4
 
@@ -57,7 +66,7 @@ plt.rcParams.update({
 # 3) Категории и раскладка 3x2
 
 df['category'] = df['xc'].map(category_map)
-plot_cats = ['Hybrid GGA', 'meta-GGA', 'MAE, MAXE', 'Hybrid meta-GGA', 'GGA', 'Machine Learning']
+plot_cats = ['Hybrid GGA', 'meta-GGA', 'MAE', 'Hybrid meta-GGA', 'GGA', 'Machine Learning']
 fig, axes = plt.subplots(3, 2, figsize=(14,10))
 axes = axes.flatten()
 
@@ -65,7 +74,7 @@ axes = axes.flatten()
 y_vals = []
 x_vals = []
 for cat in plot_cats:
-    if cat == 'MAE, MAXE':
+    if cat == 'MAE':
         continue
     sub = df[df['category']==cat]
     for xc, g in sub.groupby('xc'):
@@ -83,7 +92,7 @@ ymin = -10
 
 # 5) Построение
 for ax, cat in zip(axes, plot_cats):
-    if cat != 'MAE, MAXE':
+    if cat != 'MAE':
         sub = df[df['category']==cat]
         for i, (xc, g) in enumerate(sub.groupby('xc')):
             if xc in ('CCSD(T)', 'SVWN5'):
@@ -114,32 +123,59 @@ for ax, cat in zip(axes, plot_cats):
         col = []
         xcz = []
         for xc, g in df.groupby('xc'):
-            if xc in ('CCSD(T)', "PBE_ref", "B3LYP_ref", "O3P86"):
+            if xc in ('CCSD(T)', "NN-PBE"):
                 continue
-            grp = g.sort_values('r')
-            r = grp['r'].values
-            e = grp['e'].values
-            spline = UnivariateSpline(r, e, k=3, s=0)
-            opt = minimize_scalar(spline, bounds=(r.min(), r.max()), method='bounded')
+            e = g['e'].values
             methods.append(xc)
-            r_min.append(opt.x)
-            e_min.append(sum(abs(g['e']-ref[:len(g)])))
+            e_min.append(sum(abs(g['e']-ref[:len(g)])) / len(g))
             col.append(color_func[xc])
             xcz.append(xc)
 
         xcz = [x for _,x in sorted(zip(e_min,xcz))]
         col = [x for _,x in sorted(zip(e_min,col))]
 
+        bar_colors = [color_map[category_map[xc]] for xc in xcz]
+
+
         e_min.sort()
 
-        ax.bar(
+        bars = ax.bar(
             range(len(e_min)),
             e_min,
             width=0.7,
-            color=col,
+            color=bar_colors,
             edgecolor='black'
         )
-        ax.set_xticklabels(xcz, rotation=45, ha="right")
+        # remove the old tick labels
+        ax.set_xticks([])
+        # now label each bar in the middle
+        max_height = max(bar.get_height() for bar in bars)
+        threshold  = max_height * 0.7  # e.g. 8% of the tallest bar
+
+        for bar, label in zip(bars, xcz):
+            h = bar.get_height()
+            x = bar.get_x() + bar.get_width() / 2
+            
+            if h >= threshold:
+                # big enough → inside, centered
+                y      = h / 2
+                va     = 'center'
+                color  = 'white'
+            else:
+                # too small → above the bar
+                y      = h + max_height * 0.02  # 2% of max height as padding
+                va     = 'bottom'
+                color  = 'black'
+            
+            ax.text(
+                x, y,
+                label,
+                ha='center', va=va,
+                rotation=90,
+                fontsize=BASE * 1,
+                color=color
+            )
+        ax.set_title(cat)
 
 plt.tight_layout()
 plt.show()
