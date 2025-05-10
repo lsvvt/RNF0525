@@ -109,7 +109,7 @@ ax.scatter(
     linewidths=1.5 * SCALE
 )
 
-ax.set_ylabel("Отклонение, кДж·моль$^{-1}$")
+ax.set_ylabel("MAE/MAXE, кДж·моль$^{-1}$")
 ax.set_xticks(bar_positions)
 ax.set_xticklabels(df_sorted["xc"], rotation=45, ha="right")
 ax.set_ylim(bottom=0)

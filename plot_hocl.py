@@ -1,8 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from scipy.interpolate import UnivariateSpline
-from scipy.optimize import minimize_scalar
 import seaborn as sns
+import matplotlib.patches as mpatches
 
 
 category_map = {
@@ -31,6 +30,15 @@ color_map = {
     'Hybrid GGA':       '#e7298a',
     'Hybrid meta-GGA':  '#66a61e',
     'Machine Learning': '#e6ab02',
+}
+
+xc_sh = {
+    'LDA':              'LDA',
+    'GGA':              'GGA',
+    'meta-GGA':         'mGGA',
+    'Hybrid GGA':       'h-GGA',
+    'Hybrid meta-GGA':  'h-mGGA',
+    'Machine Learning': 'ML',
 }
 
 # 1) Загрузка данных
@@ -66,7 +74,7 @@ plt.rcParams.update({
 # 3) Категории и раскладка 3x2
 
 df['category'] = df['xc'].map(category_map)
-plot_cats = ['Hybrid GGA', 'meta-GGA', 'MAE', 'Hybrid meta-GGA', 'GGA', 'Machine Learning']
+plot_cats = ['Hybrid GGA', 'meta-GGA', 'Hybrid meta-GGA', 'MAE', 'GGA', 'Machine Learning']
 fig, axes = plt.subplots(3, 2, figsize=(14,10))
 axes = axes.flatten()
 
@@ -175,9 +183,80 @@ for ax, cat in zip(axes, plot_cats):
                 fontsize=BASE * 1,
                 color=color
             )
-        ax.set_title(cat)
+
+        unique_cats = []
+        for xc in xcz:
+            cat = category_map[xc]
+            if cat not in unique_cats:
+                unique_cats.append(cat)
+        print(unique_cats)
+        # make one colored patch per category
+
+        legend_patches = [
+            mpatches.Patch(color=color_map[cat], label=xc_sh[cat])
+            for cat in unique_cats
+        ]
+        ax.legend(
+            handles=legend_patches,
+            # title='XC category',
+            frameon=False,
+            loc='upper left',
+            fontsize=BASE * 0.9,
+            ncol=2
+        )
+        ax.set_title("MAE")
+    # if cat == 'MAE':
+    #     xlabel, ylabel = 'Exchange–correlation category', 'Mean absolute error (kcal/mol)'
+    # elif cat == "Hybrid meta-GGA":
+    #     xlabel, ylabel = 'Расстояние OH-Cl $r$ (Å)', 'Отклонение, ккал·моль$^{-1}$'
+
+    #     # and now apply them with your BASE size
+    #     ax.set_xlabel(xlabel,
+    #                 fontsize=BASE*1.1,
+    #                 fontweight='medium',
+    #                 labelpad=8)
+    #     ax.set_ylabel(ylabel,
+    #                 fontsize=BASE*1.1,
+    #                 fontweight='medium',
+    #                 labelpad=8)
+
+fig.subplots_adjust(
+    # left=0.158,   # give room on the left for the y-label
+    # bottom=0.05,  # give room at the bottom for the x-label
+    # right=0.9,
+    top=0.96
+)
+
+# add one big x-label centered under all subplots
+fig.text(
+    0.5,             # x = 50% of figure width
+    0.02,            # y = 2% of figure height (just above the bottom)
+    'Расстояние OH-Cl, (Å)',  # or whatever text you like
+    ha='center', va='center',
+    fontsize=BASE*1.5,
+    # fontweight='semibold'
+)
+
+# add one big y-label centered beside all subplots
+fig.text(
+    0.015,            # x = 2% of figure width (just right of the left edge)
+    0.5,             # y = 50% of figure height
+    'Отклонение, ккал·моль$^{-1}$',  # or “Mean absolute error (kcal/mol)”
+    ha='center', va='center',
+    rotation='vertical',
+    fontsize=BASE*1.5,
+    # fontweight='semibold'
+)
 
 plt.tight_layout()
+
+fig.subplots_adjust(
+    # left=0.158,   # give room on the left for the y-label
+    bottom=0.085,  # give room at the bottom for the x-label
+    # right=0.9,
+    # top=0.96
+)
+
 plt.show()
 
 plt.savefig("figure3v2.pdf")

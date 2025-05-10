@@ -78,8 +78,8 @@ for cat in plot_cats:
         y_vals.extend(y)
         x_vals.extend(x)
 # Задаём глобальные границы
-xmin, xmax = min(x_vals), max(x_vals)
-ymin, ymax = min(y_vals), max(y_vals)
+xmin, xmax = min(x_vals) - 0.05, max(x_vals) + 0.05
+ymin, ymax = min(y_vals) - 0.005, max(y_vals) + 0.005
 
 # 5) Построение
 for ax, cat in zip(axes, plot_cats):
