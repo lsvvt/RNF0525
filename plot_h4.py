@@ -207,4 +207,5 @@ fig.subplots_adjust(
 
 plt.show()
 
-plt.savefig("figure2.pdf")
+plt.savefig("H4.pdf")
+plt.savefig("H4.png")

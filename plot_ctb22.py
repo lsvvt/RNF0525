@@ -152,4 +152,5 @@ ax.legend(handles=handles, frameon=False, loc='upper right')
 plt.tight_layout()
 plt.show()
 
-plt.savefig("figure1.pdf")
+plt.savefig("CTB22.pdf")
+plt.savefig("CTB22.png")

@@ -259,4 +259,5 @@ fig.subplots_adjust(
 
 plt.show()
 
-plt.savefig("figure3.pdf")
+plt.savefig("HOCl.pdf")
+plt.savefig("HOCl.png")
