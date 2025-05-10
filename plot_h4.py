@@ -38,6 +38,8 @@ funcs = sorted(df['xc'].unique())
 palette = sns.color_palette('tab20', len(funcs))
 color_func = dict(zip(funcs, palette))
 
+print(color_func)
+
 dash_patterns = [(None, None), (5,2), (1,1), (3,1,1,1), (7,1,1,1,1,1)]
 markers      = ['o', 's', 'D', '^']    # разные маркеры
 
