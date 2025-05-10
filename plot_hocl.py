@@ -231,7 +231,7 @@ fig.subplots_adjust(
 fig.text(
     0.5,             # x = 50% of figure width
     0.02,            # y = 2% of figure height (just above the bottom)
-    'Расстояние OH-Cl, (Å)',  # or whatever text you like
+    'Расстояние OH-Cl, Å',  # or whatever text you like
     ha='center', va='center',
     fontsize=BASE*1.5,
     # fontweight='semibold'
@@ -241,7 +241,7 @@ fig.text(
 fig.text(
     0.015,            # x = 2% of figure width (just right of the left edge)
     0.5,             # y = 50% of figure height
-    'Отклонение, ккал·моль$^{-1}$',  # or “Mean absolute error (kcal/mol)”
+    '$\Delta E$, ккал·моль$^{-1}$',  # or “Mean absolute error (kcal/mol)”
     ha='center', va='center',
     rotation='vertical',
     fontsize=BASE*1.5,
@@ -259,4 +259,4 @@ fig.subplots_adjust(
 
 plt.show()
 
-plt.savefig("figure3v2.pdf")
+plt.savefig("figure3.pdf")

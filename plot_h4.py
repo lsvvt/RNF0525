@@ -58,7 +58,7 @@ plt.rcParams.update({
 # 3) Категории и раскладка 3x2
 
 df['category'] = df['xc'].map(category_map)
-plot_cats = ['Hybrid GGA', 'meta-GGA', 'Minima', 'Hybrid meta-GGA', 'GGA', 'Machine Learning']
+plot_cats = ['Hybrid GGA', 'meta-GGA', 'Hybrid meta-GGA', 'Minima', 'GGA', 'Machine Learning']
 fig, axes = plt.subplots(3, 2, figsize=(14,10))
 axes = axes.flatten()
 
@@ -79,7 +79,7 @@ for cat in plot_cats:
         x_vals.extend(x)
 # Задаём глобальные границы
 xmin, xmax = min(x_vals) - 0.05, max(x_vals) + 0.05
-ymin, ymax = min(y_vals) - 0.005, max(y_vals) + 0.005
+ymin, ymax = min(y_vals) - 0.005, max(y_vals) + 0.01
 
 # 5) Построение
 for ax, cat in zip(axes, plot_cats):
@@ -160,7 +160,7 @@ for ax, cat in zip(axes, plot_cats):
                     fontsize=BASE * 1
                 )
 
-        ax.set_title('Interpolated Minima')
+        ax.set_title('Минимум энегрии')
         ax.grid(True)
         # ax.legend(frameon=False, ncol=2, fontsize=BASE*0.8)
 
@@ -168,7 +168,43 @@ for ax, cat in zip(axes, plot_cats):
 # Общие подписи
 # fig.text(0.5, 0.04, 'r (Å)', ha='center', fontsize=BASE)
 # fig.text(0.06, 0.5, 'ΔE (Hartree)', va='center', rotation='vertical', fontsize=BASE)
+fig.subplots_adjust(
+    # left=0.158,   # give room on the left for the y-label
+    # bottom=0.05,  # give room at the bottom for the x-label
+    # right=0.9,
+    top=0.96
+)
+
+# add one big x-label centered under all subplots
+fig.text(
+    0.5,             # x = 50% of figure width
+    0.02,            # y = 2% of figure height (just above the bottom)
+    'Расстояние H-H, Å',  # or whatever text you like
+    ha='center', va='center',
+    fontsize=BASE*1.5,
+    # fontweight='semibold'
+)
+
+# add one big y-label centered beside all subplots
+fig.text(
+    0.015,            # x = 2% of figure width (just right of the left edge)
+    0.5,             # y = 50% of figure height
+    '$\Delta E$, ккал·моль$^{-1}$',  # or “Mean absolute error (kcal/mol)”
+    ha='center', va='center',
+    rotation='vertical',
+    fontsize=BASE*1.5,
+    # fontweight='semibold'
+)
+
 plt.tight_layout()
+
+fig.subplots_adjust(
+    # left=0.158,   # give room on the left for the y-label
+    bottom=0.085,  # give room at the bottom for the x-label
+    # right=0.9,
+    # top=0.96
+)
+
 plt.show()
 
 plt.savefig("figure2.pdf")
